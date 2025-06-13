@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Campus Crib
+
+Campus Crib is a **Next.js** application designed to help **students find accommodations near their campuses with ease and confidence**.  
+
+Whether you’re a student searching for a hostel, a room, or a small apartment close to your school, Campus Crib lets you connect directly with landlords and providers — simplifying the process of securing your perfect home away from home.
+
+## Features
+
+- 🔍 **Search accommodations:** Filter accommodations by location, price, and facilities.
+- 🏡 **View details:** See photos, pricing, and nearby landmarks for each listing.
+- 📥 **Contact landlords directly:** Send messages directly from the platform.
+- 📝 **Testimonials/Reviews:** View reviews from other students who have stayed there.
+- 🌍 **Responsive UI:** Built to be fast, lightweight, and adaptable across all devices.
+
+## Tech Stack
+
+- [**Next.js**](https://nextjs.org/) - The React framework for production
+- [**React**](https://react.dev/) - UI components
+- [**TypeScript**](https://www.typescriptlang.org/) - Type-safe code
+- [**Tailwind CSS**](https://tailwindcss.com/) - Styling and UI components
+- [**Vercel**](https://vercel.com/) - Deployment platform
 
 ## Getting Started
 
-First, run the development server:
+First, install the required packages:
 
 ```bash
-npm run dev
+npm install
 # or
-yarn dev
+yarn install
 # or
-pnpm dev
+pnpm install
 # or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+bun install
