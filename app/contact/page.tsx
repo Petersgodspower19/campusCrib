@@ -30,7 +30,7 @@ function ContactPage() {
           className="text-2xl mb-6 font-semibold"
           style={{ color: "#8B5A2B" }}
         >
-          We're here to help
+          We&apos;re here to help
         </h2>
         <form className="flex flex-col gap-4">
           <input

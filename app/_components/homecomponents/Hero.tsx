@@ -4,7 +4,6 @@ import Slider from "react-slick"
 import hero1 from "../../../public/assets/hero1.jpg";
 import hero2 from "../../../public/assets/hero2.jpg";
 import hero3 from "../../../public/assets/hero3.jpg";
-import hero4 from "../../../public/assets/hero4.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
