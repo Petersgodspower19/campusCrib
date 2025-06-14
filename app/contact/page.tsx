@@ -8,7 +8,6 @@ function ContactPage() {
     "Discover a home away from home with ease, thanks to Campus Crib!",
   ];
 
-  // `current` should be a number
   const [current, setCurrent] = useState<number>(0);
 
   const handlePrevious = () => {
@@ -21,11 +20,12 @@ function ContactPage() {
   
   return (
     <div
-      className="flex flex-col md:flex-row p-10 gap-10 mt-16 bg-white"
-     
+      className="flex flex-col md:flex-row p-10 gap-10 mt-16 bg-gray-50"
     >
       {/* left side form */}
-      <div className="flex-1 p-6 rounded-md" >
+      <div
+        className="flex-1 p-6 rounded-lg shadow-md bg-[#ffffff]"
+      >
         <h2
           className="text-2xl mb-6 font-semibold"
           style={{ color: "#8B5A2B" }}
@@ -36,24 +36,24 @@ function ContactPage() {
           <input
             type="text"
             placeholder="Name"
-            className="p-3 rounded-md border-none"
-            style={{ background: "#ffffff", color: "#8B5A2B" }}
+            className="p-3 rounded-md border-2 outline-none focus:ring-2 focus:ring-[#8B5A2B] transition"
+            style={{ color: "#8B5A2B" }}
           />
           <input
             type="email"
             placeholder="Email address"
-            className="p-3 rounded-md border-none"
-            style={{ background: "#ffffff", color: "#8B5A2B" }}
+            className="p-3 rounded-md border-2 outline-none focus:ring-2 focus:ring-[#8B5A2B] transition"
+            style={{ color: "#8B5A2B" }}
           />
           <textarea
             placeholder="Message"
             rows={4}
-            className="p-3 rounded-md border-none"
-            style={{ background: "#ffffff", color: "#8B5A2B" }}
+            className="p-3 rounded-md border-2 outline-none focus:ring-2 focus:ring-[#8B5A2B] transition"
+            style={{ color: "#8B5A2B" }}
           ></textarea>
           <button
             type="submit"
-            className="p-3 font-semibold rounded-md"
+            className="p-3 font-semibold rounded-md shadow-md transition transform hover:shadow-lg hover:translate-y-[-2px]"
             style={{ background: "#8B5A2B", color: "#ffffff" }}
           >
             Send message
@@ -63,10 +63,10 @@ function ContactPage() {
 
       {/* right side slider */}
       <div
-        className="flex-1 p-6 rounded-md relative"
+        className="flex-1 p-6 rounded-lg shadow-md bg-[#ffffff] relative"
       >
         <p
-          className="mb-6 text-lg font-semibold"
+          className="mb-6 text-lg font-semibold transition"
           style={{ color: "#8B5A2B" }}
         >
           {slides[current]}
@@ -76,14 +76,14 @@ function ContactPage() {
         <div className="absolute bottom-6 left-6 flex gap-4">
           <button
             onClick={handlePrevious}
-            className="p-2 font-semibold rounded-md"
+            className="p-2 font-semibold rounded-md shadow-md transition transform hover:shadow-lg hover:translate-y-[-2px]"
             style={{ background: "#8B5A2B", color: "#ffffff" }}
           >
             Previous
           </button>
           <button
             onClick={handleNext}
-            className="p-2 font-semibold rounded-md"
+            className="p-2 font-semibold rounded-md shadow-md transition transform hover:shadow-lg hover:translate-y-[-2px]"
             style={{ background: "#8B5A2B", color: "#ffffff" }}
           >
             Next

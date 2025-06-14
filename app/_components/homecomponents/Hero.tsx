@@ -27,7 +27,6 @@ const settings = {
 };
 
 function Hero() {
-  // Loading state for each slide
   const [loading, setLoading] = useState(new Array(hero.length).fill(true));
 
   const handleLoad = (index: number) => {

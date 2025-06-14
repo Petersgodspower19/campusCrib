@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { IoIosHome } from "react-icons/io";
 import { FaInfoCircle } from "react-icons/fa";
 import { MdExplore, MdContactSupport } from "react-icons/md";
+import { FaPlus } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import logo from "../../public/logo.png"
@@ -27,6 +28,7 @@ function Header() {
     { label: "Explore", path: "/explore", icon: <MdExplore /> },
     { label: "About", path: "/about", icon: <FaInfoCircle /> },
     { label: "Contact", path: "/contact", icon: <MdContactSupport /> },
+    {label: "Post Hostel", path: "/post", icon: <FaPlus />}
   ];
 
   return (
@@ -40,7 +42,7 @@ function Header() {
       </Link>
 
     
-      <div className='hidden md:flex items-center gap-6'>
+      <div className='hidden lg:flex items-center gap-6'>
         <div className='flex items-center bg-gray-100
          px-3 py-1 rounded-full shadow-inner relative'>
           <FiSearch className='absolute left-3 text-gray-500' />
@@ -70,7 +72,7 @@ function Header() {
       <button
         aria-label="Open Menu"
         onClick={() => setMenuOpen((prev) => !prev)}
-        className="md:hidden text-2xl"
+        className="lg:hidden text-2xl"
       >
         ☰
       </button>
