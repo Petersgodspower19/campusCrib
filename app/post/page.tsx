@@ -4,6 +4,8 @@ import ListingProcess from './_components/ListingProcess'
 import PreListingRequirement from './_components/PreListingRequirement'
 import VideoTour from './_components/VideoTour'
 import Faq from './_components/Faq'
+import Link from './_components/Link'
+
 
 function Post() {
   return (
@@ -13,6 +15,7 @@ function Post() {
       <PreListingRequirement />
       <VideoTour />
       <Faq />
+       <Link />
     </div>
   )
 }
