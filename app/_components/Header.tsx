@@ -7,14 +7,15 @@ import { FaInfoCircle } from "react-icons/fa";
 import { MdExplore, MdContactSupport } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import logo from "../../public/logo.png"
 import Image from 'next/image';
-
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -28,8 +29,15 @@ function Header() {
     { label: "Explore", path: "/explore", icon: <MdExplore /> },
     { label: "About", path: "/about", icon: <FaInfoCircle /> },
     { label: "Contact", path: "/contact", icon: <MdContactSupport /> },
-    {label: "Post Hostel", path: "/post", icon: <FaPlus />}
+    { label: "Post Hostel", path: "/post", icon: <FaPlus /> }
   ];
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      router.push(`/explore?query=${encodeURIComponent(searchTerm.trim())}`);
+      setMenuOpen(false);
+    }
+  };
 
   return (
     <header
@@ -38,30 +46,38 @@ function Header() {
       ${isScrolled ? "shadow-lg" : ""}`}
     >
       <Link href="/" className='outline-0'>
-      <Image src={logo} alt="logo" className='w-[100px]' />
+        <Image src={logo} alt="logo" className='w-[100px]' />
       </Link>
 
-    
       <div className='hidden lg:flex items-center gap-6'>
-        <div className='flex items-center bg-gray-100
-         px-3 py-1 rounded-full shadow-inner relative'>
-          <FiSearch className='absolute left-3 text-gray-500' />
-          <input
-            type='text'
-            placeholder='Search areas'
-            className='pl-9 pr-3 py-1 bg-gray-100 outline-none rounded-full'
-          />
-        </div>
+        {pathname === "/explore" && (
+          <div className='flex items-center bg-gray-100 px-3 py-1 rounded-full shadow-inner relative'>
+            <FiSearch className='absolute left-3 text-gray-500' />
+            <input
+              type="text"
+              placeholder="Search areas"
+              value={searchTerm}
+              className='pl-9 pr-3 py-1 bg-gray-100 outline-none rounded-full'
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
+            <button
+              onClick={handleSearch}
+              className="ml-2 text-sm text-white bg-[#8B5A2B] px-3 py-1 rounded-full hover:bg-[#754922]"
+            >
+              Search
+            </button>
+          </div>
+        )}
 
-        <nav className="flex items-center
-         text-gray-800 text-[14px] gap-6 uppercase">
+        <nav className="flex items-center text-gray-800 text-[14px] gap-6 uppercase">
           {links.map((link) => (
             <Link
               key={link.path}
               href={link.path}
               className={`flex items-center gap-2 px-3 py-1 rounded-[5px] 
-              ${pathname === link.path ? "bg-[hsl(29,53%,86%)]  font-semibold" 
-                : "hover:bg-gray-300"}`}
+              ${pathname === link.path ? "bg-[hsl(29,53%,86%)] font-semibold"
+                  : "hover:bg-gray-300"}`}
             >
               {link.icon} {link.label}
             </Link>
@@ -79,15 +95,23 @@ function Header() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div
-          className="absolute top-16 left-0 w-full bg-gray-50 p-6 shadow-md transition-all duration-500 transform translate-y-0">
+        <div className="absolute top-16 left-0 w-full bg-gray-50 p-6 shadow-md transition-all duration-500 transform translate-y-0">
           <div className='flex items-center bg-gray-100 px-3 py-1 mb-4 rounded-full shadow-inner relative'>
             <FiSearch className='absolute left-3 text-gray-500' />
             <input
-              type='text'
-              placeholder='Search areas'
-              className='pl-9 pr-3 py-1 w-full bg-gray-100 outline-none rounded-full'
+              type="text"
+              placeholder="Search areas"
+              value={searchTerm}
+              className='pl-9 pr-3 py-1 bg-gray-100 outline-none rounded-full w-full'
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
+            <button
+              onClick={handleSearch}
+              className="ml-2 text-sm text-white bg-[#8B5A2B] px-3 py-1 rounded-full hover:bg-[#754922]"
+            >
+              Search
+            </button>
           </div>
 
           {links.map((link) => (
@@ -102,7 +126,6 @@ function Header() {
           ))}
         </div>
       )}
-
     </header>
   )
 }

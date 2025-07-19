@@ -1,41 +1,62 @@
-import React from 'react'
-import home1 from "../../../public/assets/home1.jpg"
-import home2 from "../../../public/assets/home2.jpg"
-import home3 from "../../../public/assets/home3.jpg"
+"use client"
+import React, { useCallback, useEffect, useState } from 'react'
 import { CiLocationOn } from "react-icons/ci";
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { filterHouse, getAllHouses } from '@/app/_api/house';
+import { toast } from 'react-toastify';
 
-const houses = [
-    {
-     name: "Sharp SelfCon",
-     description: "Sweet Selfcon like this",
-     location: "Aluu, Port Harcourt",
-     features: ["Good Netwwork", "Water", "Close to School"],
-     rent: "250,000",
-     image: home2,
-    },
-    {
-     name: "Sweet 1bed",
-     description: "Very good 1bedroom apartment",
-     location: "Back of Chem, Port Harcourt",
-     features: ["Good Netwwork", "Water", "Close to School"],
-     rent: "600,000",
-     image: home1,
-    },
-    {
-     name: "3BedRoom Apartment",
-     description: "Very nice stress-free 3bed room flat apartment",
-     location: "Alakahia, Port Harcourt",
-     features: ["Federal Light(Prepaid Meter)","Water", "Good Network"],
-     rent: "1,700,000",
-     image: home3,
-    }
-]
+
+type House = {
+  _id: string;
+  title: string;
+  description: string;
+  location: string;
+  features: string[];
+  rent: number | string;
+  coverPhoto: string;
+};
+
 
 function HomeProperties() {
+  const [houses, setHouses] = useState<House[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+
+   const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = query ? await filterHouse(query) : await getAllHouses();
+      setHouses(data);
+    } catch (err) {
+      let message = "Failed to fetch houses";
+  if (err instanceof Error) {
+    message = err.message;
+  }
+      toast.error(message);
+      setError(message);
+      setHouses([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [query]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+
   return (
-    <div className='mt-7 px-4 lg:px-14 mb-7 pb-7'>
+    <div className='mt-7 px-4 lg:px-10 mb-7 pb-7'>
+      {loading && (
+        <h1 className='text-center'>Fetching houses....</h1>
+      )}
+
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+
       <div className='text-center'>
         <h2  
           className='text-gray-800 mb-3 text-[16px] font-semibold tracking-wide uppercase'>
@@ -52,34 +73,38 @@ function HomeProperties() {
       </div>
 
       <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
-        {houses.map((house, idx) => (
-          <div key={idx} 
-               className='bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200'>
-            <Image src={house.image} alt={house.name} 
-                 className='rounded-md mb-4 w-full h-50 object-cover' />
-            <h3 className='text-lg font-semibold mb-1'>{house.name}</h3>
-            <p className='text-gray-500 mb-2'>{house.description}</p>
-            <div className='flex items-center text-gray-500 mb-2'>
-              <CiLocationOn className='mr-1' />
-              {house.location}
-            </div>
-            <ul className='mb-3'>
-              {house.features?.map((feature, i) => (
-                <li key={i} 
-                    className='text-gray-500 text-sm mb-1 ml-4 list-disc'>{feature}</li>
-              ))}
-            </ul>
-            <div className='font-semibold text-[#8B5A2B] mb-2'>
-              Rent: NGN {house.rent}
-            </div>
-            <button 
-              className='bg-[#8B5A2B]
-              cursor-pointer outline-0 text-gray-100 py-2 px-4 rounded-md w-full transition-transform transform hover:translate-y-[-2px] hover:shadow-lg'>
-              View Details
-            </button>
-          </div>
-        ))}
+  {[...houses].reverse().slice(0, 3).map((house, idx) => (
+    <div key={idx} 
+         className='bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200'>
+      <Image src={house?.coverPhoto} 
+      width={500}
+        height={300}
+      loading='lazy' alt={house.title} 
+           className='rounded-md mb-4 w-full h-50 object-cover' />
+      <h3 className='text-lg font-semibold mb-1'>{house?.title}</h3>
+      <p className='text-gray-500 mb-2'>{house?.description}</p>
+      <div className='flex items-center text-gray-500 mb-2'>
+        <CiLocationOn className='mr-1' />
+        {house?.location}
       </div>
+      <ul className='mb-3'>
+        {house.features?.map((feature, i) => (
+          <li key={i} 
+              className='text-gray-500 text-sm mb-1 ml-4 list-disc'>{feature}</li>
+        ))}
+      </ul>
+      <div className='font-semibold text-[#8B5A2B] mb-2'>
+        Rent: NGN {house.rent}
+      </div>
+      <button 
+        className='bg-[#8B5A2B]
+        cursor-pointer outline-0 text-gray-100 py-2 px-4 rounded-md w-full transition-transform transform hover:translate-y-[-2px] hover:shadow-lg'>
+        View Details
+      </button>
+    </div>
+  ))}
+</div>
+
       <div className='flex justify-center mt-10 outline-0'>
             <Link
                 href="/explore"

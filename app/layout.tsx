@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer"
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-grow">
           {children}
         </main>
+        <ToastContainer position="top-right" autoClose={3000} />
         <Footer />
       </body>
     </html>

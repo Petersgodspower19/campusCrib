@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Hero from './_components/homecomponents/Hero'
 import PremiumProperties from './_components/homecomponents/PremiumProperties'
 import HomeProperties from './_components/homecomponents/HomeProperties'
@@ -11,7 +11,9 @@ function Home() {
     <div className='z-0 overflow-x-hidden'>
       <Hero />
       <PremiumProperties />
-      <HomeProperties />
+      <Suspense fallback={<div className="text-center py-10">Loading featured properties...</div>}>
+        <HomeProperties />
+      </Suspense>
       <Process />
       <Mission />
       <Testimonial />
