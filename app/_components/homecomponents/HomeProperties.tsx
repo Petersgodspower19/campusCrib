@@ -96,11 +96,16 @@ function HomeProperties() {
       <div className='font-semibold text-[#8B5A2B] mb-2'>
         Rent: NGN {house.rent}
       </div>
-      <button 
-        className='bg-[#8B5A2B]
-        cursor-pointer outline-0 text-gray-100 py-2 px-4 rounded-md w-full transition-transform transform hover:translate-y-[-2px] hover:shadow-lg'>
-        View Details
-      </button>
+      <Link
+              href={`/explore/${house._id}`}
+              className="block"
+            >
+              <button
+                className="bg-[#8B5A2B] cursor-pointer w-full text-center text-white py-2 px-4 rounded-md transition-transform transform hover:translate-y-[-2px] hover:shadow-lg"
+              >
+                View Details
+              </button>
+            </Link>
     </div>
   ))}
 </div>
