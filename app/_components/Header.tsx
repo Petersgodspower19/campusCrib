@@ -96,7 +96,8 @@ function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-gray-50 p-6 shadow-md transition-all duration-500 transform translate-y-0">
-          <div className='flex items-center bg-gray-100 px-3 py-1 mb-4 rounded-full shadow-inner relative'>
+          {pathname === "/explore" && (
+            <div className='flex items-center bg-gray-100 px-3 py-1 mb-4 rounded-full shadow-inner relative'>
             <FiSearch className='absolute left-3 text-gray-500' />
             <input
               type="text"
@@ -113,6 +114,7 @@ function Header() {
               Search
             </button>
           </div>
+          )}
 
           {links.map((link) => (
             <Link
